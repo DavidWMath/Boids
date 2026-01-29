@@ -4,12 +4,12 @@ class Boid{
 	PVector acceleration;
 	
 	public Boid(PVector position, PVector velocity){
-		acceleration = new PVector();
-		position = position;
-		velocity = velocity;
+		this.acceleration = new PVector();
+		this.position = position;
+		this.velocity = velocity;
 	}
 	
-	void drawBoid(float x; float y, float heading){
+	void drawBoid(float x, float y, float heading){
 		pushMatrix();
 		translate(x,y);
 		rotate(heading);
