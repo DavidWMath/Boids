@@ -5,7 +5,6 @@ float cohesionCoef;
 
 float seperationRadius;
 float cohesionRadius; 
-float alignRadius;
 
 float maxSpeed;
 float maxForce;
@@ -20,13 +19,12 @@ void setup(){
   
   
 	numOfBoids = 200;
-	seperationCoef = 0.5;
+	seperationCoef = 0.2;
+	alignCoef = 0.5;
 	cohesionCoef = 0.5;
-	alignCoef = 0.3;
-		
+	
 	seperationRadius = 100;
 	cohesionRadius = 100;
-	alignRadius = 100;
 	
 	maxSpeed = 3;
 	maxForce = 0.1; //maximum magnitude that cna be applied to the boids1

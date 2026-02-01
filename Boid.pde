@@ -77,7 +77,30 @@ class Boid{
 		target.setMag(maxSpeed);
 		PVector force = PVector.sub(target, velocity);
 		force.limit(maxForce);
+		force.mult(cohesionCoef);
 		acceleration.add(force);
+	}
+	
+	void alignment(){
+		PVector target = new PVector();
+		int totalBoidsInRadius = 0;
+		for(Boid other : boids){
+			float distanceBetweenBoids = dist(position.x, position.y, other.position.x, other.position.y);
+			if(other != this && distanceBetweenBoids < alignRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the boid
+				target.add(other.velocity);
+				totalBoidsInRadius++;
+			}
+		}
+		if(totalBoidsInRadius == 0){
+			return;
+		}
+		target.div(totalBoidsInRadius);
+		target.setMag(maxSpeed);
+		PVector force = PVector.sub(target, velocity);
+		force.limit(maxForce);
+		force.mult(alignCoef);
+		acceleration.add(force);
+		
 	}
 	
 	void wrap(){
@@ -88,11 +111,13 @@ class Boid{
 	}
 	
 	void update(){
+		acceleration = new PVector();
 		wrap();
-		seperation();
+		alignment();
 		cohesion();
+		seperation();
+		position.add(velocity);
 		velocity.add(acceleration);
 		velocity.limit(maxSpeed);
-		position.add(velocity);
 	}
 }

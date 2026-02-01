@@ -19,7 +19,7 @@ void setup(){
   frameRate(60);
   
   
-	numOfBoids = 200;
+	numOfBoids = 1000;
 	seperationCoef = 0.5;
 	cohesionCoef = 0.5;
 	alignCoef = 0.3;
