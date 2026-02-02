@@ -1,3 +1,6 @@
+float maxSpeed = 3;
+float maxForce = 0.1;
+
 class Boid{
 	PVector position;
 	PVector velocity; 
@@ -52,7 +55,8 @@ class Boid{
 		}
 		
 		target.div(totalBoidsInRadius);
-		target.setMag(maxSpeed);
+		target.normalize();
+		target.mult(maxSpeed);
 		PVector force = PVector.sub(target, velocity);
 		force.limit(maxForce);
 		force.mult(seperationCoef);
@@ -74,7 +78,8 @@ class Boid{
 		}
 		center.div(totalBoidsInRadius);
 		PVector target = PVector.sub(center, position);
-		target.setMag(maxSpeed);
+		target.normalize();
+		target.mult(maxSpeed);
 		PVector force = PVector.sub(target, velocity);
 		force.limit(maxForce);
 		force.mult(cohesionCoef);
@@ -86,7 +91,7 @@ class Boid{
 		int totalBoidsInRadius = 0;
 		for(Boid other : boids){
 			float distanceBetweenBoids = dist(position.x, position.y, other.position.x, other.position.y);
-			if(other != this && distanceBetweenBoids < alignRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the boid
+			if(other != this && distanceBetweenBoids < alignmentRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the boid
 				target.add(other.velocity);
 				totalBoidsInRadius++;
 			}
@@ -95,10 +100,11 @@ class Boid{
 			return;
 		}
 		target.div(totalBoidsInRadius);
-		target.setMag(maxSpeed);
-		PVector force = PVector.sub(target, velocity);
+		target.normalize();
+		target.mult(maxSpeed);
+		PVector force = PVector.sub(target,  velocity);
 		force.limit(maxForce);
-		force.mult(alignCoef);
+		force.mult(alignmentCoef);
 		acceleration.add(force);
 		
 	}
@@ -111,13 +117,13 @@ class Boid{
 	}
 	
 	void update(){
-		acceleration = new PVector();
-		wrap();
+		acceleration.set(0, 0);
 		alignment();
 		cohesion();
 		seperation();
-		position.add(velocity);
 		velocity.add(acceleration);
 		velocity.limit(maxSpeed);
+		position.add(velocity);
+		wrap();
 	}
 }
