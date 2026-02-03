@@ -5,6 +5,9 @@ float seperationCoef;
 float alignmentCoef;
 float cohesionCoef;	
 
+int screenWidth = 900;
+int screenHeight = 720;
+
 float seperationRadius;
 float cohesionRadius; 
 float alignmentRadius;
@@ -29,14 +32,32 @@ Slider NumBoidsSlider;
 Slider maxBoidSpeedSlider;
 Slider maxBoidForceSlider;
 
+Slider HeightOfScreenSlider;
+Slider WidthOfScreenSlider;
 
+
+
+void settings(){
+	size(screenWidth, screenHeight);
+}
 
 void setup(){
-	size(1280, 720);
 	frameRate(60);	
 	
-  
 	cp5 = new ControlP5(this);
+	
+	WidthOfScreenSlider = cp5.addSlider("screenWidth") //writes into variables with the same name
+	  .setPosition(10, 210)
+	  .setSize(120, 15)
+	  .setRange(400, 1920)
+	  .setValue(720);
+
+	HeightOfScreenSlider = cp5.addSlider("screenHeight")
+	  .setPosition(10, 190)
+	  .setSize(120, 15)
+	  .setRange(400, 1080)
+	  .setValue(900);	
+  
 
 	seperationRadiusSlider = cp5.addSlider("seperationRadius")
 	.setPosition(10, 10)
@@ -90,7 +111,7 @@ void setup(){
 	.setPosition(10, 170)
 	.setSize(120, 15)
 	.setRange(0, 1)
-	.setValue(0.5);
+	.setValue(0.1);
   
   
 	numOfBoids = int(NumBoidsSlider.getValue());
