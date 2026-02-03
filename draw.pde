@@ -3,6 +3,9 @@
 void draw(){
 	background(0);
 	
+	fill(96, 96, 96); // Set fill color to Red (RGB)
+	rect(0, height - 180, width, height); //width, height
+	
 	while (boids.size() < numOfBoids) {
 	  boids.add(new Boid(
 		new PVector(random(width), random(height)),

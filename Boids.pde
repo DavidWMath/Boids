@@ -49,13 +49,13 @@ void setup(){
 	WidthOfScreenSlider = cp5.addSlider("screenWidth") //writes into variables with the same name
 	  .setPosition(10, 210)
 	  .setSize(120, 15)
-	  .setRange(400, 1920)
+	  .setRange(600, 1920)
 	  .setValue(720);
 
 	HeightOfScreenSlider = cp5.addSlider("screenHeight")
 	  .setPosition(10, 190)
 	  .setSize(120, 15)
-	  .setRange(400, 1080)
+	  .setRange(600, 1080)
 	  .setValue(900);	
   
 

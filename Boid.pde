@@ -112,8 +112,8 @@ class Boid{
 	void wrap(){
 		if(position.x < 0){position.x = width;}
 		else if(position.x > width) { position.x = 0; }
-		if(position.y < 0){position.y = height;}
-		else if(position.y > height){position.y = 0;}
+		if(position.y <= 0 + 10){position.y = height - 200;}
+		else if(position.y >= height - 200){position.y = 10;} //0 is top,
 	}
 	
 	void update(){
