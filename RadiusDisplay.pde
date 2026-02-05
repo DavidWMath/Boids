@@ -1,17 +1,17 @@
-boolean isChecked = false;
-int boxX = 10, boxY = 10, boxSize = 20;
+boolean RadiusCheckBoxisChecked = false;
+int RadiusCheckBoxX = 100, RadiusCheckBoxY = 10, RadiusCheckBoxSize = 20;
 
-void CreateCheckBox(){
+void CreateRadiusCheckBox(){
 //CheckBox Toggle
-	if (isChecked) {
+	if (RadiusCheckBoxisChecked) {
 		fill(100); // Filled when checked Opacity Effect
 
 	} else {
 		fill(255); // White when unchecked
 	}
-	rect(boxX, boxY, boxSize, boxSize);
+	rect(screenWidth - 30, RadiusCheckBoxY, RadiusCheckBoxSize, RadiusCheckBoxSize);
 	
-	if (isChecked) {
+	if (RadiusCheckBoxisChecked) {
 		WidthOfScreenSlider.setPosition(10, -100);
 		HeightOfScreenSlider.setPosition(10, -100);
 		seperationRadiusSlider.setPosition(10, -100);
@@ -37,13 +37,6 @@ void CreateCheckBox(){
 		maxBoidSpeedSlider.setPosition(10, 190);
 		maxBoidForceSlider.setPosition(10, 210);
 	}
-  text("Toggle Sliders", boxX + 40, boxY + 15);
+  text("Toggle Radius'", screenWidth - 115, RadiusCheckBoxY + 15);
 }
 
-//Mouse On Press 
-void mousePressed() {
-	// Check if mouse is within bounds
-	if (mouseX > boxX && mouseX < boxX + boxSize && mouseY > boxY && mouseY < boxY + boxSize) { //If The Mouse Lines Up With The Box X/Y Coordinates
-		isChecked = !isChecked; //Toggle state
-	}
-}

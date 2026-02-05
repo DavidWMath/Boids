@@ -55,12 +55,14 @@ void settings(){
 	size(screenWidth, screenHeight);
 }
 
+
 //Setup Function
 void setup(){
 	CreateSliders();
 	frameRate(60);  
 	CreateBoidsInArray();
 	CreateBoidShape();	
+	updateSliderVisibility();
 }
 
 //Functions For The Screen Height And Width Sliders

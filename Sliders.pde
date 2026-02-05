@@ -88,3 +88,22 @@ void GetValuesOfSliders(){
 	cohesionRadius = cohesionRadiusSlider.getValue();
 	alignmentRadius = alignmentRadiusSlider.getValue();	
 }
+
+void updateSliderVisibility() {
+	boolean show = SliderCheckBoxisChecked;
+
+	seperationRadiusSlider.setVisible(show);
+	cohesionRadiusSlider.setVisible(show);
+	alignmentRadiusSlider.setVisible(show);
+
+	seperationCoefSlider.setVisible(show);
+	cohesionCoefSlider.setVisible(show);
+	alignmentCoefSlider.setVisible(show);
+
+	NumBoidsSlider.setVisible(show);
+	maxBoidSpeedSlider.setVisible(show);
+	maxBoidForceSlider.setVisible(show);
+
+	WidthOfScreenSlider.setVisible(show);
+	HeightOfScreenSlider.setVisible(show);
+}
