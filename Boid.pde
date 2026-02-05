@@ -1,17 +1,17 @@
-float maxSpeed = 3;
-float maxForce = 0.1;
-
 class Boid{
+	//Declaring Boid Variables for Tracking Boid Movement
 	PVector position;
 	PVector velocity; 
 	PVector acceleration;
 	
+	//Setting the Positions and Velocity Variables
 	public Boid(PVector position, PVector velocity){
 		this.acceleration = new PVector();
 		this.position = position;
 		this.velocity = velocity;
 	}
 	
+	//Creating the Boids
 	void drawBoid(float x, float y, float heading){
 		pushMatrix();
 		translate(x,y);
@@ -20,6 +20,7 @@ class Boid{
 		popMatrix();
 	}
 	
+	//Drawing the Boids on SCreen
 	void display() {
 		drawBoid(position.x, position.y, velocity.heading());
 		if(position.x < 50){
@@ -36,24 +37,28 @@ class Boid{
 		}
 	}
 	
+	//Seperation Rule
 	void seperation(){
 		PVector target = new PVector();
 		int totalBoidsInRadius = 0;
-		for(Boid other : boids){ //for every boid in Boids arr
-			float distanceBetweenBoids = dist(position.x, position.y, other.position.x, other.position.y);
-			if(other != this && distanceBetweenBoids < seperationRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the boid
-				PVector diff = PVector.sub(position, other.position); //get distance betwene them
-				if (distanceBetweenBoids > 0 && distanceBetweenBoids < seperationRadius) {
-					diff.div(distanceBetweenBoids * distanceBetweenBoids); //create an exponential "acceleration" to the boid
+		
+		
+		for(Boid other : boids){ //Looping through all Boids
+			float distanceBetweenBoids = dist(position.x, position.y, other.position.x, other.position.y); //Get the Distance Between Boid and Other Boid
+			if(other != this && distanceBetweenBoids < seperationRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the Boid
+				PVector diff = PVector.sub(position, other.position); //get distance between them
+				if (distanceBetweenBoids > 0 && distanceBetweenBoids < seperationRadius) { //If the Boids aren't on top of eachother, (Ensures no Mass Acceleration)
+					diff.div(distanceBetweenBoids * distanceBetweenBoids); //Get the general difference in distance between all Boids
 				}
 				target.add(diff); //add that difference of acceleration to my target
-				totalBoidsInRadius++;
+				totalBoidsInRadius++; //Increase the amount of Boids in Seperation Radius
 			}
 		}
-		if(totalBoidsInRadius == 0){ //SO i dont continue with the following code if no boids exists within its radius
+		if(totalBoidsInRadius == 0){ //So i dont continue with the following code if no boids exists within its radius
 			return;
 		}
 		
+		//Updating the Physics to the Boid
 		target.div(totalBoidsInRadius);
 		target.normalize();
 		target.mult(maxSpeed);
@@ -63,12 +68,13 @@ class Boid{
 		acceleration.add(force);
 	}
 	
+	//Cohesion Rule
 	void cohesion() {
 		PVector center = new PVector();
 		int totalBoidsInRadius = 0;
 		for(Boid other : boids){
 			float distanceBetweenBoids = dist(position.x, position.y, other.position.x, other.position.y);
-			if(other != this && distanceBetweenBoids < cohesionRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the boid
+			if(other != this && distanceBetweenBoids < cohesionRadius){ 
 				center.add(other.position);
 				totalBoidsInRadius++;
 			}
@@ -91,7 +97,7 @@ class Boid{
 		int totalBoidsInRadius = 0;
 		for(Boid other : boids){
 			float distanceBetweenBoids = dist(position.x, position.y, other.position.x, other.position.y);
-			if(other != this && distanceBetweenBoids < alignmentRadius){ //if I am not checking my own boid, and also the boid is within the seperationRadius of the boid
+			if(other != this && distanceBetweenBoids < alignmentRadius){ 
 				target.add(other.velocity);
 				totalBoidsInRadius++;
 			}
@@ -109,13 +115,16 @@ class Boid{
 		
 	}
 	
-	void wrap(){
-		if(position.x < 0){position.x = width;}
-		else if(position.x > width) { position.x = 0; }
-		if(position.y <= 0 + 10){position.y = height - 200;}
-		else if(position.y >= height - 200){position.y = 10;} //0 is top,
+	
+	//Wrapping Function To Make Sure Boids Stay On Screen
+	void wrap(){ //0,0 Is Top Left 
+		if(position.x < 0){position.x = width;} //If Too Far Left
+		else if(position.x > width) { position.x = 0; } //If Too Far Right
+		if(position.y <= 0){position.y = height;} //If Too High
+		else if(position.y >= height){position.y = 0;} //If Too Low
 	}
 	
+	//Update Function That Is Called By All Three Rules THta updates the Boids General Physics.
 	void update(){
 		acceleration.set(0, 0);
 		alignment();
