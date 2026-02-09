@@ -1,3 +1,5 @@
+PGraphics radiusLayer;
+
 class Boid{
 	//Declaring Boid Variables for Tracking Boid Movement
 	PVector position;
