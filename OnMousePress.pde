@@ -1,4 +1,7 @@
 boolean radiiChanged = true;
+int dynamicRadiusX = 0;
+int dynamicX = 0;
+int dynamicY = 0;
 
 void mousePressed() {
 	if (mouseX > CheckBoxSliderX && mouseX < CheckBoxSliderX + CheckBoxSliderSize &&
@@ -8,17 +11,28 @@ void mousePressed() {
 		updateSliderVisibility(); 
 	}
 
-    int dynamicRadiusX = int(WidthOfScreenSlider.getValue()) - 30;
+	//Full Screen Slider
+	if(FullScreenToggle){
+		dynamicRadiusX = int(displayWidth - 30);
+		dynamicX = int(displayWidth - 30); // match drawing X
+		dynamicY = int(displayHeight - 130);
+	}
+	else{
+		dynamicRadiusX = int(WidthOfScreenSlider.getValue()) - 30;
+		dynamicX = int(WidthOfScreenSlider.getValue()) - 30; // match drawing X
+		dynamicY = int(HeightOfScreenSlider.getValue()) - 30;
+	}
 
+
+	//Radius Box Check
     if (mouseX > dynamicRadiusX && mouseX < dynamicRadiusX + RadiusCheckBoxSize &&
         mouseY > RadiusCheckBoxY && mouseY < RadiusCheckBoxY + RadiusCheckBoxSize) {
-
         RadiusCheckBoxisChecked = !RadiusCheckBoxisChecked;
         
     }
 	
-	  int dynamicX = int(WidthOfScreenSlider.getValue()) - 30; // match drawing X
-  int dropBoxSize = 15;
+	
+	int dropBoxSize = 15;
 
 	// Only toggle small radius checkboxes if the main radius checkbox is checked
 	if (RadiusCheckBoxisChecked) {
@@ -44,6 +58,16 @@ void mousePressed() {
 		   radiiChanged = true; 
 		}
 	}
+	
+	int FullScreenBoxX = 10;
+
+	int fullScreenSize = 20;
+	
+	// Full Screen
+		if (mouseX > FullScreenBoxX && mouseX < FullScreenBoxX + fullScreenSize &&
+			mouseY >  dynamicY && mouseY < dynamicY + fullScreenSize) {
+			FullScreenToggle = !FullScreenToggle;
+		}
 
 	
 	

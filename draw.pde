@@ -61,6 +61,7 @@ void draw(){
 	background(0); //Set Back-Ground Colour
 	CreateCheckBoxSlider();
 	CreateRadiusCheckBox();
+	FullScreen();
 	
 	
 	GetValuesOfSliders();

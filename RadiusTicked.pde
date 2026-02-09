@@ -3,9 +3,17 @@ boolean CohesionRadiusChecked = false;
 boolean AlignmentRadiusChecked = false;
 int offsetY = 30;
 int spacing = 25;
+int AllRadiusCheckBoxX = 0;
 
 public void drawRadiusDropDown(){
-	int AllRadiusCheckBoxX = int(WidthOfScreenSlider.getValue()) - 30; //get right most edge
+	if(FullScreenToggle){
+		AllRadiusCheckBoxX = int((displayWidth - 30));
+	}
+	else{
+		AllRadiusCheckBoxX = int(WidthOfScreenSlider.getValue()) - 30; //get right most edge
+	}
+	
+	
 	drawCheckbox(AllRadiusCheckBoxX, RadiusCheckBoxY + offsetY, 15, SeperationRadiusChecked, "Separation");
 	drawCheckbox(AllRadiusCheckBoxX, RadiusCheckBoxY + offsetY + spacing, 15, CohesionRadiusChecked, "Cohesion");
 	drawCheckbox(AllRadiusCheckBoxX, RadiusCheckBoxY + offsetY + spacing*2, 15, AlignmentRadiusChecked, "Alignment");

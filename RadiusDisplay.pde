@@ -4,16 +4,33 @@ boolean RadiusCheckBoxisChecked = false;
 
 
 public void CreateRadiusCheckBox() {
-    int RadiusCheckBoxX = int(WidthOfScreenSlider.getValue()) - 30; //-30 to offset from right edge
+	//if full screen
+	if(FullScreenToggle){
+		int RadiusCheckBoxX = int(displayWidth - 30); //-30 to offset from right edge
 
-    if (RadiusCheckBoxisChecked) {
-        fill(255); // Checked
-    } else {
-        fill(100); // Unchecked
-    }
-    rect(RadiusCheckBoxX, RadiusCheckBoxY, RadiusCheckBoxSize, RadiusCheckBoxSize);
+		if (RadiusCheckBoxisChecked) {
+			fill(255); // Checked
+		} else {
+			fill(100); // Unchecked
+		}
+		rect(RadiusCheckBoxX, RadiusCheckBoxY, RadiusCheckBoxSize, RadiusCheckBoxSize);
 
-    text("Toggle Radius", RadiusCheckBoxX - 80, RadiusCheckBoxY + 15);
+		text("Toggle Radius", RadiusCheckBoxX - 80, RadiusCheckBoxY + 15);
+
+	}
+	else{ //Not Full Screen
+	
+		int RadiusCheckBoxX = int(WidthOfScreenSlider.getValue()) - 30; //-30 to offset from right edge
+
+		if (RadiusCheckBoxisChecked) {
+			fill(255); // Checked
+		} else {
+			fill(100); // Unchecked
+		}
+		rect(RadiusCheckBoxX, RadiusCheckBoxY, RadiusCheckBoxSize, RadiusCheckBoxSize);
+
+		text("Toggle Radius", RadiusCheckBoxX - 80, RadiusCheckBoxY + 15);
+	}
 	
 	//If ticked, draw the three checkboxes
 	if (RadiusCheckBoxisChecked) {

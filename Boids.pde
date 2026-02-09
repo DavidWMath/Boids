@@ -68,15 +68,16 @@ void setup(){
 
 //Functions For The Screen Height And Width Sliders
 void screenWidth(int val) { //Screen Height Slider
-  screenWidth = val;
-  surface.setSize(screenWidth, screenHeight);
-  radiusLayer = createGraphics(screenWidth, screenHeight);
+	screenWidth = val;
+	surface.setSize(screenWidth, screenHeight);
+
+	radiusLayer = createGraphics(screenWidth, screenHeight);
 }
 
 void screenHeight(int val) { //Screen Height Slider
-  screenHeight = val;
-  surface.setSize(screenWidth, screenHeight);
-   radiusLayer = createGraphics(screenWidth, screenHeight);
+	screenHeight = val;
+	surface.setSize(screenWidth, screenHeight);
+	radiusLayer = createGraphics(screenWidth, screenHeight);
 }
 
 //Functions To Create Boids and Their Shape
